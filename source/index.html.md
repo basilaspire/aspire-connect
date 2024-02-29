@@ -28,49 +28,49 @@ Aspire Connect is Aspire's API suite that allows our clients to automate their f
 
 # Authentication
 
-> To authorize, use this code:
+Aspire Connect uses client credentials to authenticate requests.
+
+Please get in touch with your account executive for help with client credentials & whitelisting your IP for utilizing the APIs.
+
+The auth flow is as follows:
+
+![auth flow](https://content.pstmn.io/d14b59a0-70bc-468f-bc82-e141b0f31a8f/U2NyZWVuc2hvdCAyMDIzLTExLTMwIGF0IDIuMjYuMzcgUE0ucG5n "Title")
+
+> Example Request:
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
+curl --location "https://api.aspireapp.com/public/v1/login" \
+  --header 'Content-Type: application/json' \
+  --data '[
+      {   
+          "grant_type" : "client_credentials",
+          "client_id" : "SGLTTC-qXox2TAe1WHs7Erd",
+          "client_secret" : "CkuDGSF1HCkei9ZEgthbor2suQAITZ36"
+      }
+  ]'
 ```
 
 ```javascript
-const kittn = require('kittn');
+import axios from 'axios';
 
-let api = kittn.authorize('meowmeowmeow');
+let api = axios.post('https://api.aspireapp.com/public/v1/login');
+
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + ###
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+> Make sure to replace `###` with your API key.
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+The `/login` endpoint enables Aspire Connect clients to obtain an access token using their client credentials. This access token has a 30 minute expiry and serves as a bearer token in the Authorization request header for all subsequent calls to authorized endpoints.
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+Make sure to send query params in request body`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>###</code> with your personal API key.
 </aside>
 
 # Kittens
 
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+## Get All Users
 
 ```shell
 curl "http://example.com/api/kittens" \
